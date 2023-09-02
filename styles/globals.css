@@ -20,3 +20,11 @@ body {
   color: #e7e8e8;
   background: #070707;
 }
+
+.connect {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
