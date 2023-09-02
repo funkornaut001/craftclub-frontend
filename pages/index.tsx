@@ -6,6 +6,7 @@ import {
   useClaimIneligibilityReasons,
   useContract,
   useContractMetadata,
+  useNFT,
   useTotalCirculatingSupply,
   Web3Button,
 } from "@thirdweb-dev/react";
@@ -20,7 +21,11 @@ const Home: NextPage = () => {
   const address = useAddress();
   const [quantity, setQuantity] = useState(1);
   const { contract: editionDrop } = useContract(myEditionDropContractAddress);
+  // metadata for the contract / collection
   const { data: contractMetadata } = useContractMetadata(editionDrop);
+  // Grab token URI to grab image of tokenId
+  const { data: nft, error } = useNFT(editionDrop, tokenId);
+  const imageUrl = nft?.metadata?.image;
 
   {/* set minting time limit/cooldown - user can only mint once every 12 hours - only protects front end
   However, keep in mind that local storage is local to the user's browser and machine. 
@@ -259,7 +264,8 @@ const Home: NextPage = () => {
               {/* Image Preview of NFTs */}
               <img
                 className={styles.image}
-                src={contractMetadata?.image}
+                // image url grabs the url from the tokenURI of the specific 1155 tokenId.
+                src={imageUrl}
                 alt={`${contractMetadata?.name} preview image`}
               />
 
