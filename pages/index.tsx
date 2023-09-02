@@ -265,7 +265,7 @@ const Home: NextPage = () => {
               <img
                 className={styles.image}
                 // image url grabs the url from the tokenURI of the specific 1155 tokenId.
-                src={imageUrl}
+                src={imageUrl || undefined}
                 alt={`${contractMetadata?.name} preview image`}
               />
 
